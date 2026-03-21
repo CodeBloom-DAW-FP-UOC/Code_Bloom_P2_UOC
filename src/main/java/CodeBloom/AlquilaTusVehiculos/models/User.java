@@ -33,6 +33,6 @@ public class User {
 
     private Boolean isAdmin;
 
-    @OneToMany(mappedBy = "user")
-    private List<Rental> rentals;
+    //@OneToMany(mappedBy = "user")
+    //private List<Rental> rentals;
 }
