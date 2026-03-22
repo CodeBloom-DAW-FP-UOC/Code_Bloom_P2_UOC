@@ -1,4 +1,5 @@
 package CodeBloom.AlquilaTusVehiculos.models;
+
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -26,76 +27,31 @@ public class Rental {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public LocalDateTime getStartDate() { return startDate; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
+    public LocalDateTime getEstimatedReturnDate() { return estimatedReturnDate; }
+    public void setEstimatedReturnDate(LocalDateTime estimatedReturnDate) { this.estimatedReturnDate = estimatedReturnDate; }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
+    public LocalDateTime getReturnDate() { return returnDate; }
+    public void setReturnDate(LocalDateTime returnDate) { this.returnDate = returnDate; }
 
-    public LocalDateTime getEstimatedReturnDate() {
-        return estimatedReturnDate;
-    }
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 
-    public void setEstimatedReturnDate(LocalDateTime estimatedReturnDate) {
-        this.estimatedReturnDate = estimatedReturnDate;
-    }
+    public String getNote() { return note; }
+    public void setNote(String note) { this.note = note; }
 
-    public LocalDateTime getReturnDate() {
-        return returnDate;
-    }
+    public String getState() { return state; }
+    public void setState(String state) { this.state = state; }
 
-    public void setReturnDate(LocalDateTime returnDate) {
-        this.returnDate = returnDate;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
+    public Vehicle getVehicle() { return vehicle; }
+    public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
 }

@@ -1,4 +1,5 @@
 package CodeBloom.AlquilaTusVehiculos.models;
+
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -26,92 +27,37 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle")
     private List<Rental> rentals;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getPlateNumber() { return plateNumber; }
+    public void setPlateNumber(String plateNumber) { this.plateNumber = plateNumber; }
 
-    public String getPlateNumber() {
-        return plateNumber;
-    }
+    public String getBrand() { return brand; }
+    public void setBrand(String brand) { this.brand = brand; }
 
-    public void setPlateNumber(String plateNumber) {
-        this.plateNumber = plateNumber;
-    }
+    public String getModel() { return model; }
+    public void setModel(String model) { this.model = model; }
 
-    public String getBrand() {
-        return brand;
-    }
+    public Integer getManufacturingYear() { return manufacturingYear; }
+    public void setManufacturingYear(Integer manufacturingYear) { this.manufacturingYear = manufacturingYear; }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public String getModel() {
-        return model;
-    }
+    public Double getDailyPrice() { return dailyPrice; }
+    public void setDailyPrice(Double dailyPrice) { this.dailyPrice = dailyPrice; }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+    public String getGasType() { return gasType; }
+    public void setGasType(String gasType) { this.gasType = gasType; }
 
-    public Integer getManufacturingYear() {
-        return manufacturingYear;
-    }
+    public Integer getKm() { return km; }
+    public void setKm(Integer km) { this.km = km; }
 
-    public void setManufacturingYear(Integer manufacturingYear) {
-        this.manufacturingYear = manufacturingYear;
-    }
+    public String getState() { return state; }
+    public void setState(String state) { this.state = state; }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getDailyPrice() {
-        return dailyPrice;
-    }
-
-    public void setDailyPrice(Double dailyPrice) {
-        this.dailyPrice = dailyPrice;
-    }
-
-    public String getGasType() {
-        return gasType;
-    }
-
-    public void setGasType(String gasType) {
-        this.gasType = gasType;
-    }
-
-    public Integer getKm() {
-        return km;
-    }
-
-    public void setKm(Integer km) {
-        this.km = km;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public List<Rental> getRentals() {
-        return rentals;
-    }
-
-    public void setRentals(List<Rental> rentals) {
-        this.rentals = rentals;
-    }
+    public List<Rental> getRentals() { return rentals; }
+    public void setRentals(List<Rental> rentals) { this.rentals = rentals; }
 }

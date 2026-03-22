@@ -29,7 +29,7 @@ public class UserController {
         return "users/form";
     }
 
-    //Pdte de modificar con la fecha de registro correcta. getRegistrationDate y setRegistrationDate daban error. Hay que revisar el modelo.
+    //Añadido librearia de Local DateTime para guardar la fecha de registro del usuario
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user) {
         user.setRegistrationDate(LocalDateTime.now());
