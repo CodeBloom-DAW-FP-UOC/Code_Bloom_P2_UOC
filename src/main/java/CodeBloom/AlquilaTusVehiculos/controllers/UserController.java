@@ -1,10 +1,11 @@
 package CodeBloom.AlquilaTusVehiculos.controllers;
 
-import CodeBloom.AlquilaTusVehiculos.models.User;
-import CodeBloom.AlquilaTusVehiculos.repositories.UserRepository;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import CodeBloom.AlquilaTusVehiculos.models.User;
+import CodeBloom.AlquilaTusVehiculos.repositories.UserRepository;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/users")
@@ -28,9 +29,10 @@ public class UserController {
         return "users/form";
     }
 
-    //Pdte de modificar con la fecha de registro correcta. getRegistrationDate y setRegistrationDate daban error. Hay que revisar el modelo.
+    //Añadido librearia de Local DateTime para guardar la fecha de registro del usuario
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user) {
+        user.setRegistrationDate(LocalDateTime.now());
         userRepository.save(user);
         return "redirect:/users";
     }
