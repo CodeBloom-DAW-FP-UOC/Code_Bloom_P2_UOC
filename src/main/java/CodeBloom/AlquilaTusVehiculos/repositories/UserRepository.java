@@ -1,5 +1,3 @@
-//Pdte. de implementar, necesario para evitar errores en los controladores
-
 package CodeBloom.AlquilaTusVehiculos.repositories;
 
 import CodeBloom.AlquilaTusVehiculos.models.User;
