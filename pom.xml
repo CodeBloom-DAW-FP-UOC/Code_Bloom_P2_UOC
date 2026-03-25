@@ -67,6 +67,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Dotenv para variables de entorno -->
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
