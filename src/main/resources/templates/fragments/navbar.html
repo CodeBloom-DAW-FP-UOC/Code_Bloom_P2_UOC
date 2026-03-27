@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="navbar">
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">🚗</div>
+            <div>
+                <h1 class="brand-title">AlquilaTusVehiculos</h1>
+                <p class="brand-subtitle">by Code Bloom</p>
+            </div>
+        </div>
+
+        <div class="user-box">
+            <p class="user-role">Administrador</p>
+            <p class="user-email">admin@alquilatusvehiculos.com</p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <a th:href="@{/}" class="nav-link active">Dashboard</a>
+        <a th:href="@{/users}" class="nav-link">Clientes</a>
+        <a th:href="@{/vehicles}" class="nav-link">Vehículos</a>
+        <a th:href="@{/rentals}" class="nav-link">Alquileres</a>
+    </nav>
+</div>
+</body>
+</html>

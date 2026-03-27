@@ -27,7 +27,7 @@ public class DashboardController {
         model.addAttribute("totalUsers", userRepository.count());
         model.addAttribute("totalVehicles", vehicleRepository.count());
         model.addAttribute("totalRentals", rentalRepository.count());
-        return "dashboard";
+        return "dashboard/dashboard";
     }
 
 }

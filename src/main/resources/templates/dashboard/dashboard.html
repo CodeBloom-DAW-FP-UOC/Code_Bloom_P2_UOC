@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | AlquilaTusVehiculos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<main class="dashboard-container">
+    <section class="hero">
+        <h2>Bienvenido a AlquilaTusVehiculos</h2>
+        <p>Panel de control - Gestiona tu negocio de alquiler de vehículos de manera eficiente</p>
+    </section>
+
+    <section class="stats-grid">
+        <article class="stat-card">
+            <div>
+                <p class="stat-label">Total Clientes</p>
+                <h3 class="stat-number" th:text="${totalUsers}">0</h3>
+            </div>
+            <div class="stat-icon green">
+                <i class="fa-regular fa-user"></i>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div>
+                <p class="stat-label">Total Vehículos</p>
+                <h3 class="stat-number" th:text="${totalVehicles}">0</h3>
+            </div>
+            <div class="stat-icon pink">
+                <i class="fa-solid fa-car-side"></i>
+            </div>
+        </article>
+
+        <article class="stat-card">
+            <div>
+                <p class="stat-label">Total Alquileres</p>
+                <h3 class="stat-number" th:text="${totalRentals}">0</h3>
+            </div>
+            <div class="stat-icon yellow">
+                <i class="fa-regular fa-file-lines"></i>
+            </div>
+        </article>
+    </section>
+
+    <section class="panel">
+        <h3 class="panel-title">Estado General</h3>
+
+        <div class="status-grid">
+            <article class="status-card soft-green">
+                <div class="status-header">
+                    <span>Vehículos registrados</span>
+                    <strong th:text="${totalVehicles}">0</strong>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill green-fill" style="width: 100%;"></div>
+                </div>
+            </article>
+
+            <article class="status-card soft-pink">
+                <div class="status-header">
+                    <span>Alquileres registrados</span>
+                    <strong th:text="${totalRentals}">0</strong>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill pink-fill" style="width: 100%;"></div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="panel">
+        <div class="rental-grid">
+            <article class="rental-card outlined-pink">
+                <p class="rental-title">Clientes Totales</p>
+                <div class="rental-number-row">
+                    <span class="rental-badge pink-badge">
+                        <i class="fa-regular fa-user"></i>
+                    </span>
+                    <strong th:text="${totalUsers}">0</strong>
+                </div>
+                <p class="rental-subtitle">Usuarios registrados en el sistema</p>
+            </article>
+
+            <article class="rental-card outlined-green">
+                <p class="rental-title">Alquileres Totales</p>
+                <div class="rental-number-row">
+                    <span class="rental-badge green-badge">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </span>
+                    <strong th:text="${totalRentals}">0</strong>
+                </div>
+                <p class="rental-subtitle">Operaciones registradas en el sistema</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h3 class="panel-title">Acciones Rápidas</h3>
+
+        <div class="actions-grid">
+            <a th:href="@{/users}" class="action-card">
+                <div class="action-icon green">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div>
+                    <strong>Ver Clientes</strong>
+                    <p>Consultar usuarios</p>
+                </div>
+            </a>
+
+            <a th:href="@{/vehicles}" class="action-card">
+                <div class="action-icon pink">
+                    <i class="fa-solid fa-car-side"></i>
+                </div>
+                <div>
+                    <strong>Ver Vehículos</strong>
+                    <p>Consultar vehículos</p>
+                </div>
+            </a>
+
+            <a th:href="@{/rentals}" class="action-card">
+                <div class="action-icon yellow">
+                    <i class="fa-regular fa-file-lines"></i>
+                </div>
+                <div>
+                    <strong>Ver Alquileres</strong>
+                    <p>Consultar alquileres</p>
+                </div>
+            </a>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
