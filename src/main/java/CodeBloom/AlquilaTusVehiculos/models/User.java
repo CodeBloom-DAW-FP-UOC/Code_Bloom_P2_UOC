@@ -2,6 +2,7 @@ package CodeBloom.AlquilaTusVehiculos.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class User {
     private String address;
 
     private LocalDateTime registrationDate;
+    private LocalDateTime modificationDate;
 
     @Column(unique = true)
     private String drivingLicense;
@@ -35,4 +37,14 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Rental> rentals;
+
+    @PrePersist
+    public void prePersist() {
+        this.registrationDate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.modificationDate = LocalDateTime.now();
+    }
 }
