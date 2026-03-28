@@ -29,7 +29,7 @@ public class UserController {
         return "users/form";
     }
 
-    //Añadido librearia de Local DateTime para guardar la fecha de registro del usuario
+    //Añadida librería de Local DateTime para guardar la fecha de registro del usuario
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user) {
         user.setRegistrationDate(LocalDateTime.now());
