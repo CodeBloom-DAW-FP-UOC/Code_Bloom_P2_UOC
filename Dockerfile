@@ -1,23 +1,27 @@
-FROM maven:3.9.6-eclipse-temurin-21 AS build
+# --- Fase 1: Build ---
+FROM maven:3.9-eclipse-temurin-21 AS build
 
-WORKDIR /app
+WORKDIR /build
 
 COPY pom.xml .
-COPY .mvn .mvn
-COPY mvnw mvnw
-COPY mvnw.cmd mvnw.cmd
-RUN chmod +x mvnw && ./mvnw -q -DskipTests dependency:go-offline
+RUN mvn dependency:go-offline -q
 
-COPY src src
-RUN ./mvnw clean package -DskipTests
+COPY src ./src
+RUN mvn package -DskipTests -q
 
-
-FROM eclipse-temurin:21-jre
+# --- Fase 2: Runtime ---
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY --from=build /app/target/AlquilaTusVehiculos-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /build/target/AlquilaTusVehiculos-0.0.1-SNAPSHOT.jar app.jar
+
+COPY --from=build /build/src/main/resources/templates ./resources/templates
+COPY --from=build /build/src/main/resources/static ./resources/static
 
 EXPOSE 8080
+EXPOSE 35729
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", \
+  "--spring.thymeleaf.prefix=file:/app/resources/templates/", \
+  "--spring.web.resources.static-locations=file:/app/resources/static/"]
