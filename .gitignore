@@ -33,10 +33,3 @@ build/
 .vscode/
 
 .env
-
-# Entorno local personal (No aceptare este cambio en PR)
-pom.xml
-Dockerfile
-docker-compose.yml
-src/main/resources/application.properties
-
