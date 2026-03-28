@@ -34,7 +34,7 @@ public class RentalController {
         model.addAttribute("rental", new Rental());
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("vehicles", vehicleRepository.findAll());
-        return "rentals/form";
+        return "rentals/create";
     }
 
     @PostMapping("/save")
@@ -55,7 +55,7 @@ public class RentalController {
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("vehicles", vehicleRepository.findAll());
 
-        return "rentals/form";
+        return "rentals/create";
     }
 
     @GetMapping("/delete/{id}")
