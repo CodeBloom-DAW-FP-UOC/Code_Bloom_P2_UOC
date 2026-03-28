@@ -1,0 +1,162 @@
+/* ==============================
+   NAVBAR
+   ============================== */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ece6dd;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.nav-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #88D4AB 0%, #A7E9C5 100%);
+}
+
+.nav-brand-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1F2937;
+    font-weight: 600;
+}
+
+.nav-brand-subtitle {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #88D4AB;
+    font-weight: 500;
+}
+
+.nav-user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-user-info {
+    text-align: right;
+}
+
+.nav-user-name {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #1F2937;
+    font-weight: 500;
+}
+
+.nav-user-email {
+    margin: 0;
+    font-size: 0.75rem;
+    color: #6B7280;
+}
+
+.nav-user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FFB6C1 0%, #FFC0CB 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #6B7280;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    border-radius: 6px 6px 0 0;
+}
+
+.nav-item:hover {
+    background-color: #D1F7E6;
+    color: #1F4F3B;
+}
+
+.nav-item.active {
+    color: #88D4AB;
+    border-bottom: 2px solid #88D4AB;
+    font-weight: 600;
+}
+
+.logout-btn {
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    color: #6B7280;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+@media (max-width: 1024px) {
+    .navbar {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .nav-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .nav-user-info {
+        text-align: left;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+    }
+}
+
