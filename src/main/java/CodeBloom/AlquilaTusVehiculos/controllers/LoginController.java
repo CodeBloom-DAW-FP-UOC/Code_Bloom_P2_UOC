@@ -5,7 +5,6 @@ import CodeBloom.AlquilaTusVehiculos.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-
 @Controller
 public class LoginController {
 

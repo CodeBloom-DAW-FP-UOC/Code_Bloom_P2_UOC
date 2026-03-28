@@ -17,15 +17,15 @@ services:
     image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
       MYSQL_DATABASE: ${DB_NAME}
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
 volumes:
-  app-data:
   db-data:
