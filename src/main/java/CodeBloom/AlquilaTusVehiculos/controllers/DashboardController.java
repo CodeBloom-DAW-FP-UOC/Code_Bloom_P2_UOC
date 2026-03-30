@@ -34,4 +34,5 @@ public class DashboardController {
         model.addAttribute("totalRentals", rentalRepository.count());
         return "dashboard/dashboard";
     }
+
 }
