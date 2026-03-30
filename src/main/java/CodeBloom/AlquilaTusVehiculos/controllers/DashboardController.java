@@ -23,11 +23,15 @@ public class DashboardController {
     }
 
     @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
+    }
+
+    @GetMapping("/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("totalUsers", userRepository.count());
         model.addAttribute("totalVehicles", vehicleRepository.count());
         model.addAttribute("totalRentals", rentalRepository.count());
         return "dashboard/dashboard";
     }
-
 }
