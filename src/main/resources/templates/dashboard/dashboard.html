@@ -6,11 +6,13 @@
     <title>Dashboard | AlquilaTusVehiculos</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body class="dashboard-body">
 
-<!--<div th:replace="fragments/navbar :: navbar"></div>-->
+<div th:replace="fragments/navbar :: navbar"></div>
 
 
 <main class="dashboard-container">
@@ -127,7 +129,7 @@
                 </div>
             </a>
 
-            <a th:href="@{/rentals}" class="action-card">
+            <a th:href="@{/rentals/new}" class="action-card">
                 <div class="action-icon yellow">
                     <i class="fa-regular fa-file-lines"></i>
                 </div>
@@ -140,7 +142,7 @@
     </section>
 </main>
 
-<!--<div th:replace="fragments/footer :: footer"></div>-->
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>
