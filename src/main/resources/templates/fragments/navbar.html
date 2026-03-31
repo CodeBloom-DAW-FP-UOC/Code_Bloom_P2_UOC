@@ -24,8 +24,8 @@
                 <!-- Usuario + logout -->
                 <div class="nav-user-section">
                     <div class="nav-user-info">
-                        <p class="nav-user-name" th:text="${session.loggedUser != null ? session.loggedUser.name : 'Administrador'}">Administrador</p>
-                        <p class="nav-user-email" th:text="${session.loggedUser != null ? session.loggedUser.email : 'admin@alquilatusvehiculos.com'}">admin@alquilatusvehiculos.com</p>
+                        <p class="nav-user-name" th:text="${session.loggedUser != null ? session.loggedUser.name : ''}"></p>
+                        <p class="nav-user-email" th:text="${session.loggedUser != null ? session.loggedUser.email : ''}"></p>
                     </div>
                     <div class="nav-user-avatar">A</div>
                     <a th:href="@{/login}" class="nav-item logout-btn" title="Cerrar sesión">
