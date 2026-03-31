@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${rental.id != null} ? 'Editar alquiler' : 'Nuevo alquiler'">Nuevo alquiler</title>
-    <link rel="stylesheet" th:href="@{/css/rentals/create.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/create.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -25,25 +25,34 @@
 
     <section class="content-layout">
         <div class="form-panel">
+            <div th:if="${success}" class="message message-success" th:text="${success}"></div>
             <form th:action="@{/rentals/save}" th:object="${rental}" method="post">
                 <input type="hidden" th:field="*{id}">
 
                 <div class="form-group">
-                    <label for="name">Nombre</label>
-                    <input id="name" type="text" placeholder="Nombre">
-                </div>
-
-                <div class="form-group">
-                    <label for="surname">Apellidos</label>
-                    <input id="surname" type="text" placeholder="Apellidos">
+                    <label for="user">Cliente registrado</label>
+                    <select id="user" name="user.id" required>
+                        <option value="" disabled
+                                th:selected="${rental.user == null}">
+                            Seleccionar un cliente
+                        </option>
+                        <option th:each="u : ${users}"
+                                th:value="${u.id}"
+                                th:text="${u.name + ' - ' + u.email}"
+                                th:selected="${rental.user != null and rental.user.id == u.id}">
+                        </option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="vehicle">Vehículo</label>
                     <select id="vehicle" name="vehicle.id" required>
-                        <option value="" disabled selected>Seleccionar un vehículo</option>
+                        <option value="" disabled th:selected="${rental.vehicle == null}">
+                            Seleccionar un vehículo
+                        </option>
                         <option th:each="v : ${vehicles}"
                                 th:value="${v.id}"
+                                th:data-price="${v.dailyPrice}"
                                 th:text="${v.brand + ' ' + v.model}"
                                 th:selected="${rental.vehicle != null and rental.vehicle.id == v.id}">
                         </option>
@@ -54,21 +63,35 @@
                     <div class="form-group half">
                         <label for="startDate">Fecha Inicio</label>
                         <div class="input-with-icon">
-                            <input id="startDate" type="date" th:field="*{startDate}" required>
+                            <input id="startDate"
+                                   type="date"
+                                   name="startDate"
+                                   th:value="${rental.startDate != null ? #temporals.format(rental.startDate, 'yyyy-MM-dd') : ''}"
+                                   required>
                         </div>
                     </div>
 
-                    <div class="form-group half">
-                        <label for="estimatedReturnDate">Fecha de fin</label>
+                    <div class="form-group half"
+                         th:attr="data-error=${error != null and #strings.contains(error, 'fecha de fin') ? error : ''}">
+                        <label for="estimatedReturnDate">Fecha Fin</label>
                         <div class="input-with-icon">
-                            <input id="estimatedReturnDate" type="date" th:field="*{estimatedReturnDate}" required>
+                            <input id="estimatedReturnDate"
+                                   type="date"
+                                   name="estimatedReturnDate"
+                                   th:value="${rental.estimatedReturnDate != null ? #temporals.format(rental.estimatedReturnDate, 'yyyy-MM-dd') : ''}"
+                                   th:classappend="${error != null and #strings.contains(error, 'fecha de fin')} ? ' input-error' : ''"
+                                   required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Total (€)</label>
-                    <input id="price" type="text" th:field="*{price}" placeholder="Calculado automáticamente" readonly>
+                    <input id="price"
+                           type="text"
+                           th:value="${rental.price != null ? rental.price + ' €' : 'Calculado automáticamente'}"
+                           readonly>
+                    <small>El precio se calculará automáticamente al guardar</small>
                 </div>
 
                 <div class="form-group">
@@ -77,7 +100,10 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Crear Alquiler</button>
+                    <button type="submit" class="btn btn-primary"
+                            th:text="${rental.id != null} ? 'Actualizar alquiler' : 'Crear alquiler'">
+                        Crear alquiler
+                    </button>
                     <a th:href="@{/rentals}" class="btn btn-secondary">Cancelar</a>
                 </div>
             </form>
@@ -106,6 +132,61 @@
             <div class="empty-fleet" th:if="${vehicles == null or #lists.isEmpty(vehicles)}">
                 <p>No hay vehículos cargados todavía.</p>
             </div>
+        </div>
+    </section>
+    <section class="rentals-summary">
+        <div class="rentals-summary-header">
+            <h2>Alquileres registrados</h2>
+            <p>Información de los alquileres guardados en la base de datos</p>
+        </div>
+
+        <div class="table-wrapper" th:if="${rentals != null and !#lists.isEmpty(rentals)}">
+            <table class="rentals-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Email</th>
+                    <th>Vehículo</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="r : ${rentals}">
+                    <td th:text="${r.id}">1</td>
+
+                    <td th:text="${r.user != null ? r.user.name : 'Sin cliente'}">Cliente</td>
+
+                    <td th:text="${r.user != null ? r.user.email : '-'}">email@email.com</td>
+
+                    <td th:text="${r.vehicle != null ? r.vehicle.brand + ' ' + r.vehicle.model : '-'}">Vehículo</td>
+
+                    <td th:text="${r.startDate != null ? #temporals.format(r.startDate, 'dd/MM/yyyy') : '-'}">01/01/2026</td>
+
+                    <td th:text="${r.estimatedReturnDate != null ? #temporals.format(r.estimatedReturnDate, 'dd/MM/yyyy') : '-'}">03/01/2026</td>
+
+                    <td th:text="${r.price != null ? r.price + ' €' : '-'}">120 €</td>
+
+                    <td class="actions-cell">
+                        <a th:href="@{/rentals/edit/{id}(id=${r.id})}" class="table-btn edit-btn">
+                            Editar
+                        </a>
+                        <a th:href="@{/rentals/delete/{id}(id=${r.id})}"
+                           class="table-btn delete-btn"
+                           onclick="return confirm('¿Seguro que quieres eliminar este alquiler?');">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="empty-rentals" th:if="${rentals == null or #lists.isEmpty(rentals)}">
+            <p>No hay alquileres registrados.</p>
         </div>
     </section>
 </main>
