@@ -1,62 +1,59 @@
 package CodeBloom.AlquilaTusVehiculos.controllers;
 
-import CodeBloom.AlquilaTusVehiculos.services.UserService;
+import CodeBloom.AlquilaTusVehiculos.models.User;
+import CodeBloom.AlquilaTusVehiculos.repositories.UserRepository;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
-import CodeBloom.AlquilaTusVehiculos.models.User;
+
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public String listUsers(Model model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "users/list";
-    }
-
-    @GetMapping("/new")
-    public String showCreateForm(Model model) {
+        model.addAttribute("users", userRepository.findAll());
         model.addAttribute("user", new User());
-        return "users/form";
+        return "users/users";
     }
 
-    //Añadida librería de Local DateTime para guardar la fecha de registro del usuario
     @PostMapping("/save")
     public String saveUser(@ModelAttribute User user) {
-        userService.saveUser(user);
+        if (user.getId() == null) {
+            user.setIsAdmin(false);
+        } else {
+            Optional<User> existingUser = userRepository.findById(user.getId());
+            existingUser.ifPresent(existing -> user.setIsAdmin(existing.getIsAdmin()));
+        }
+
+        userRepository.save(user);
         return "redirect:/users";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<User> user = userService.getUserById(id);
+        Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
             return "redirect:/users";
         }
 
+        model.addAttribute("users", userRepository.findAll());
         model.addAttribute("user", user.get());
-        return "users/form";
-    }
-
-    @PostMapping("/edit/{id}")
-    public String showUpdatedUser(@PathVariable Long id, @ModelAttribute User userDetails) {
-        userService.updateUser(id, userDetails);
-        return "redirect:/users/" + id;
+        return "users/users";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
+        userRepository.deleteById(id);
         return "redirect:/users";
     }
 }
