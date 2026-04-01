@@ -73,6 +73,7 @@ body {
 .form-group select,
 .form-group textarea {
     width: 100%;
+    font-family: inherit;
     border: 1px solid #cfcfcf;
     border-radius: 6px;
     background: #efefef;
@@ -115,14 +116,16 @@ body {
     padding-right: 34px;
 }
 
-.calendar-icon {
+input[type="date"] {
+    width: 100%;
+    padding-right: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 13px;
-    color: #7d7d7d;
-    pointer-events: none;
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .form-actions {
@@ -194,11 +197,11 @@ body {
 }
 
 .vehicle-image-placeholder {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
     font-size: 12px;
     color: #9a9a9a;
     background: #f1f1f1;
@@ -224,11 +227,11 @@ body {
 }
 
 .empty-fleet {
-    width: 100%;
-    min-height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    min-height: 180px;
     border: 1px dashed #cfcfcf;
     border-radius: 12px;
     background: #f8f8f8;
@@ -240,26 +243,199 @@ body {
     color: #8c8c8c;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    font-family: inherit;
+.rentals-summary {
+    margin-top: 2rem;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
-input[type="date"] {
+.rentals-summary-header {
+    margin-bottom: 1rem;
+}
+
+.rentals-summary-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #111111;
+}
+
+.rentals-summary-header p {
+    margin: 0.25rem 0 0;
+    color: #666;
+}
+
+.table-wrapper {
     width: 100%;
-    padding-right: 10px;
+    overflow-x: auto;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    background: #fff;
 }
 
-.input-with-icon {
+.rentals-table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.92rem;
+    background: #fff;
+}
+
+.rentals-table thead {
+    background: #f5f6fa;
+}
+
+.rentals-table th,
+.rentals-table td {
+    padding: 0.85rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #ececec;
+}
+
+.rentals-table th {
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+
+.rentals-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+.rentals-table tbody tr:nth-child(even) {
+    background: #fcfcfd;
+}
+
+.rentals-table th:nth-child(1),
+.rentals-table td:nth-child(1) {
+    width: 50px;
+}
+
+.rentals-table th:nth-child(2),
+.rentals-table td:nth-child(2) {
+    width: 150px;
+}
+
+.rentals-table th:nth-child(3),
+.rentals-table td:nth-child(3) {
+    width: 210px;
+}
+
+.rentals-table th:nth-child(4),
+.rentals-table td:nth-child(4) {
+    width: 150px;
+}
+
+.rentals-table th:nth-child(5),
+.rentals-table td:nth-child(5),
+.rentals-table th:nth-child(6),
+.rentals-table td:nth-child(6) {
+    width: 140px;
+}
+
+.rentals-table th:nth-child(7),
+.rentals-table td:nth-child(7) {
+    width: 90px;
+}
+
+.rentals-table th:nth-child(8),
+.rentals-table td:nth-child(8) {
+    width: 110px;
+}
+
+.rentals-table th:nth-child(9),
+.rentals-table td:nth-child(9) {
+    width: 240px;
+    word-break: break-word;
+}
+
+.rentals-table th:nth-child(10),
+.rentals-table td:nth-child(10) {
+    width: 140px;
+}
+
+.actions-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    align-items: flex-start;
+}
+
+.table-btn {
+    display: inline-block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.84rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: 0.2s ease;
+}
+
+.edit-btn {
+    background: #eef4ff;
+    border: 1px solid #cddcff;
+    color: #2f5bd3;
+}
+
+.edit-btn:hover {
+    background: #dfeaff;
+}
+
+.delete-btn {
+    background: #fff1f1;
+    border: 1px solid #f3c5c5;
+    color: #c93b3b;
+}
+
+.delete-btn:hover {
+    background: #ffe1e1;
+}
+
+.empty-rentals {
+    text-align: center;
+    padding: 1.5rem;
+    color: #666;
+    background: #f8f9fb;
+    border-radius: 12px;
+}
+
+.form-group {
     position: relative;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+.input-error {
+    border: 1px solid #dc2626;
+}
+
+.form-group[data-error]:not([data-error=""])::after {
+    content: attr(data-error);
     position: absolute;
-    right: 10px;
-    cursor: pointer;
-    opacity: 0.7;
+    left: 0;
+    top: calc(100% + 6px);
+    background: #dc2626;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.form-group[data-error]:not([data-error=""])::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: calc(100% + 1px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #dc2626 transparent;
+    z-index: 10;
 }
 
 @media (max-width: 1100px) {
@@ -275,6 +451,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
     .vehicle-card {
         width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .rentals-table {
+        font-size: 0.84rem;
     }
 }
 

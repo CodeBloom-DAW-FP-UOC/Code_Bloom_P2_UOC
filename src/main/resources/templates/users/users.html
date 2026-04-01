@@ -3,16 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Alquileres | AlquilaTusVehiculos</title>
+    <title th:text="${user.id != null} ? 'Editar usuario | AlquilaTusVehiculos' : 'Usuarios | AlquilaTusVehiculos'">
+        Usuarios | AlquilaTusVehiculos
+    </title>
+
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/navbar.css}">
     <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/users.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
+
 <div th:replace="fragments/navbar :: navbar('users')"></div>
 
+<main class="users-page">
+    <section class="page-heading">
+        <a th:href="@{/users}" class="back-arrow">←</a>
+        <div class="page-heading-text">
+            <h1 th:text="${user.id != null} ? 'Editar Usuario' : 'Nuevo Usuario'">Nuevo Usuario</h1>
+            <p>Da de alta usuarios y consulta los registrados en la base de datos</p>
+        </div>
+    </section>
+
+    <section class="content-layout">
+        <div class="form-panel">
+            <div th:if="${success}" class="message message-success" th:text="${success}"></div>
+            <div th:if="${error}" class="message message-error" th:text="${error}"></div>
+
+            <form th:action="@{/users/save}" th:object="${user}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group">
+                    <label for="name">Nombre completo</label>
+                    <input id="name" type="text" th:field="*{name}" placeholder="Introduce el nombre del usuario" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input id="email" type="email" th:field="*{email}" placeholder="usuario@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input id="password" type="password" th:field="*{password}" placeholder="Introduce una contraseña" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="phone">Teléfono</label>
+                        <input id="phone" type="text" th:field="*{phone}" placeholder="600123123" required>
+                    </div>
+
+                    <div class="form-group half">
+                        <label for="drivingLicense">Carnet de Conducir</label>
+                        <input id="drivingLicense" type="text" th:field="*{drivingLicense}" placeholder="12345678X" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input id="address" type="text" th:field="*{address}" placeholder="Calle, número, ciudad..." required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary"
+                            th:text="${user.id != null} ? 'Actualizar usuario' : 'Crear usuario'">
+                        Crear usuario
+                    </button>
+                    <a th:href="@{/users}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section class="users-summary">
+        <div class="users-summary-header">
+            <h2>Usuarios registrados</h2>
+            <p>Información de los usuarios guardados en la base de datos</p>
+        </div>
+
+        <div class="table-wrapper" th:if="${users != null and !#lists.isEmpty(users)}">
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Carnet</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="u : ${users}">
+                    <td th:text="${u.id}"></td>
+                    <td th:text="${u.name}"></td>
+                    <td th:text="${u.email}"></td>
+                    <td th:text="${u.phone != null ? u.phone : '-'}"></td>
+                    <td th:text="${u.address != null ? u.address : '-'}"></td>
+                    <td th:text="${u.drivingLicense != null ? u.drivingLicense : '-'}"></td>
+                    <td class="actions-cell">
+                        <a th:href="@{/users/edit/{id}(id=${u.id})}" class="table-btn edit-btn">
+                            Editar
+                        </a>
+                        <a th:href="@{/users/delete/{id}(id=${u.id})}"
+                           class="table-btn delete-btn"
+                           onclick="return confirm('¿Seguro que quieres eliminar este usuario?');">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="empty-users" th:if="${users == null or #lists.isEmpty(users)}">
+            <p>No hay usuarios registrados.</p>
+        </div>
+    </section>
+</main>
 
 <div th:replace="fragments/footer :: footer"></div>
+
 </body>
 </html>
