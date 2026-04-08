@@ -1,0 +1,476 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f1ea;
+    color: #1f1f1f;
+}
+
+.rental-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 36px 40px 48px;
+}
+
+.page-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.back-arrow {
+    text-decoration: none;
+    color: #9e9e9e;
+    font-size: 24px;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.page-heading-text h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.page-heading-text p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: #9c9c9c;
+}
+
+.content-layout {
+    display: grid;
+    grid-template-columns: 402px 1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.form-panel {
+    background: #f8f8f8;
+    border: 1px solid #d8d8d8;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #151515;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    font-family: inherit;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    background: #efefef;
+    font-size: 13px;
+    color: #5f5f5f;
+    outline: none;
+}
+
+.form-group input,
+.form-group select {
+    height: 31px;
+    padding: 0 11px;
+}
+
+.form-group textarea {
+    height: 74px;
+    resize: none;
+    padding: 10px 11px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #aaaaaa;
+}
+
+.form-row {
+    display: flex;
+    gap: 18px;
+}
+
+.form-row .half {
+    flex: 1;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon input {
+    padding-right: 34px;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding-right: 10px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 31px;
+    padding: 0 14px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #f6bcc8;
+    border-color: #f6bcc8;
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background: #ececec;
+    border-color: #bfbfbf;
+    color: #676767;
+}
+
+.fleet-panel {
+    padding-top: 2px;
+}
+
+.fleet-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111111;
+}
+
+.fleet-header p {
+    margin: 3px 0 14px;
+    font-size: 12px;
+    color: #9e9e9e;
+}
+
+.fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 223px);
+    gap: 34px 90px;
+}
+
+.vehicle-card {
+    width: 223px;
+    background: #f8f8f8;
+    border: 1px solid #d8d8d8;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.vehicle-image {
+    width: 100%;
+    height: 122px;
+    background: #ffffff;
+}
+
+.vehicle-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    color: #9a9a9a;
+    background: #f1f1f1;
+}
+
+.vehicle-body {
+    padding: 12px 12px 14px;
+}
+
+.vehicle-body h3 {
+    margin: 0 0 8px;
+    font-size: 13px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #111111;
+}
+
+.vehicle-body p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.25;
+    color: #4f4f4f;
+}
+
+.empty-fleet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 180px;
+    border: 1px dashed #cfcfcf;
+    border-radius: 12px;
+    background: #f8f8f8;
+}
+
+.empty-fleet p {
+    margin: 0;
+    font-size: 13px;
+    color: #8c8c8c;
+}
+
+.rentals-summary {
+    margin-top: 2rem;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.rentals-summary-header {
+    margin-bottom: 1rem;
+}
+
+.rentals-summary-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #111111;
+}
+
+.rentals-summary-header p {
+    margin: 0.25rem 0 0;
+    color: #666;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.rentals-table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.92rem;
+    background: #fff;
+}
+
+.rentals-table thead {
+    background: #f5f6fa;
+}
+
+.rentals-table th,
+.rentals-table td {
+    padding: 0.85rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid #ececec;
+}
+
+.rentals-table th {
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+}
+
+.rentals-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+.rentals-table tbody tr:nth-child(even) {
+    background: #fcfcfd;
+}
+
+.rentals-table th:nth-child(1),
+.rentals-table td:nth-child(1) {
+    width: 50px;
+}
+
+.rentals-table th:nth-child(2),
+.rentals-table td:nth-child(2) {
+    width: 150px;
+}
+
+.rentals-table th:nth-child(3),
+.rentals-table td:nth-child(3) {
+    width: 210px;
+}
+
+.rentals-table th:nth-child(4),
+.rentals-table td:nth-child(4) {
+    width: 150px;
+}
+
+.rentals-table th:nth-child(5),
+.rentals-table td:nth-child(5),
+.rentals-table th:nth-child(6),
+.rentals-table td:nth-child(6) {
+    width: 140px;
+}
+
+.rentals-table th:nth-child(7),
+.rentals-table td:nth-child(7) {
+    width: 90px;
+}
+
+.rentals-table th:nth-child(8),
+.rentals-table td:nth-child(8) {
+    width: 110px;
+}
+
+.rentals-table th:nth-child(9),
+.rentals-table td:nth-child(9) {
+    width: 240px;
+    word-break: break-word;
+}
+
+.rentals-table th:nth-child(10),
+.rentals-table td:nth-child(10) {
+    width: 140px;
+}
+
+.actions-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    align-items: flex-start;
+}
+
+.table-btn {
+    display: inline-block;
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.84rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: 0.2s ease;
+}
+
+.edit-btn {
+    background: #eef4ff;
+    border: 1px solid #cddcff;
+    color: #2f5bd3;
+}
+
+.edit-btn:hover {
+    background: #dfeaff;
+}
+
+.delete-btn {
+    background: #fff1f1;
+    border: 1px solid #f3c5c5;
+    color: #c93b3b;
+}
+
+.delete-btn:hover {
+    background: #ffe1e1;
+}
+
+.empty-rentals {
+    text-align: center;
+    padding: 1.5rem;
+    color: #666;
+    background: #f8f9fb;
+    border-radius: 12px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.input-error {
+    border: 1px solid #dc2626;
+}
+
+.form-group[data-error]:not([data-error=""])::after {
+    content: attr(data-error);
+    position: absolute;
+    left: 0;
+    top: calc(100% + 6px);
+    background: #dc2626;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.3;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.form-group[data-error]:not([data-error=""])::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: calc(100% + 1px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #dc2626 transparent;
+    z-index: 10;
+}
+
+@media (max-width: 1100px) {
+    .content-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .fleet-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 24px;
+    }
+
+    .vehicle-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .rentals-table {
+        font-size: 0.84rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .rental-page {
+        padding: 24px 18px 32px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .fleet-grid {
+        grid-template-columns: 1fr;
+    }
+}
